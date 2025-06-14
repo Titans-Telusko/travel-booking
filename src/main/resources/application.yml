@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/travelbooking
     username: postgres
-    password: Ziva@9830*
+    password: 
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
