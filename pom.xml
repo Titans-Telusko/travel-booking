@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.titans.travelbooking</groupId>
 	<artifactId>TravelBooking</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>TravelBooking</name>
 	<description>Titans Travel Booking System</description>
 	<url/>
