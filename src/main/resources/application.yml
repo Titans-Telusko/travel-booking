@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: TravelBooking
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/travelbooking
+    username: postgres
+    password: Ziva@9830*
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8084
+  servlet:
+    context-path: /titans/travels
