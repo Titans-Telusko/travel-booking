@@ -13,10 +13,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Loging {
+public class Lodging {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer lId;
 
     private String hotelName;
 
@@ -32,11 +32,14 @@ public class Loging {
 
     private String city;
     @OneToMany(
-            mappedBy = "loging",
+            mappedBy = "lodging",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
             @JsonIgnore
     List<Booking> bookings;
+   @ManyToOne
+   @JoinColumn(name = "lodging_id")
+    private Location location;
 
 }
