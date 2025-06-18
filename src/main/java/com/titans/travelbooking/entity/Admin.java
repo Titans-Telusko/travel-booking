@@ -23,10 +23,10 @@ public class Admin {
             allocationSize = 1
     )
     private Integer aId;
-
+    @Column(nullable = false)
     private String fullName;
-
+    @Column(unique = true , nullable = false)
     private String username;
-
+    @Column(nullable = false)
     private String password;
 }
