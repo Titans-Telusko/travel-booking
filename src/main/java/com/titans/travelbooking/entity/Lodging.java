@@ -30,6 +30,8 @@ public class Lodging {
 
     private String country;
 
+    private String imageUrl;
+
     private String city;
     @OneToMany(
             mappedBy = "lodging",
