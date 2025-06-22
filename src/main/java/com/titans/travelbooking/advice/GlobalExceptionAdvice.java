@@ -1,6 +1,6 @@
 package com.titans.travelbooking.advice;
 
-import jakarta.persistence.OneToMany;
+import com.titans.travelbooking.exception.AdminNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +27,11 @@ public class GlobalExceptionAdvice {
     public ResponseEntity<Object> handleDuplicateEntry(DataIntegrityViolationException ex) {
         String message = "Username already exists. Please use a different email.";
         return new ResponseEntity<>(message, HttpStatus.CONFLICT); // 409 Conflict
+    }
+
+    @ExceptionHandler(AdminNotFoundException.class)
+    public ResponseEntity<String> adminIdNotFoundHandler(AdminNotFoundException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
 }

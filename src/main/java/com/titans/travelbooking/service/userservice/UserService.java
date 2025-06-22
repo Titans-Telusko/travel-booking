@@ -4,6 +4,7 @@ import com.titans.travelbooking.dto.UserRequest;
 import com.titans.travelbooking.entity.Users;
 import com.titans.travelbooking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,12 +12,15 @@ public class UserService implements IUserService{
     @Autowired
     private UserRepository userRepo;
 
+
+    BCryptPasswordEncoder encoder=new BCryptPasswordEncoder(12);
+
     @Override
     public Users saveUser(UserRequest userRequest) {
           Users user=Users.builder()
                   .name(userRequest.getName())
                   .username(userRequest.getUsername())
-                  .password(userRequest.getPassword())
+                  .password(encoder.encode(userRequest.getPassword()))
                   .phone(userRequest.getPhone())
                   .age(userRequest.getAge())
                   .build();
