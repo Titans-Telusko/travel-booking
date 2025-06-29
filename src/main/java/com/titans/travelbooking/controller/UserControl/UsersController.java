@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 public class UsersController {
@@ -26,4 +28,14 @@ public class UsersController {
         return "hello user controller setup is ready";
     }
 
+
+    @GetMapping("/get-all-users")
+    public ResponseEntity<List<Users>> getAllUsers(){
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+    }
+
+    @GetMapping("/search/{word}")
+    public ResponseEntity<List<Users>> searchByUsername(@PathVariable String word){
+        return new ResponseEntity<>(userService.searchByUser(word), HttpStatus.OK);
+    }
 }

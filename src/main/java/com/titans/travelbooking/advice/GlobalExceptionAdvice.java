@@ -1,10 +1,7 @@
 package com.titans.travelbooking.advice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.titans.travelbooking.exception.CloudinaryUploadException;
-import com.titans.travelbooking.exception.InvalidFileException;
-import com.titans.travelbooking.exception.LodgeNotFoundException;
-import com.titans.travelbooking.exception.LodgingServiceException;
+import com.titans.travelbooking.exception.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +37,19 @@ public class GlobalExceptionAdvice {
     public ResponseEntity<Object> handleDuplicateEntry(DataIntegrityViolationException ex) {
         String message = "Username already exists. Please use a different email.";
         return new ResponseEntity<>(message, HttpStatus.CONFLICT); // 409 Conflict
+    }
+
+    @ExceptionHandler(AdminNotFoundException.class)
+    public ResponseEntity<String> adminIdNotFoundHandler(AdminNotFoundException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<?> userNotFoundHandler(UserNotFoundException ex){
+        Map<String, Object> mp=new HashMap<>();
+        mp.put("TimeStamp" , LocalDate.now());
+        mp.put("error" , ex.getMessage());
+        return new ResponseEntity<>(mp, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(JsonProcessingException.class)
