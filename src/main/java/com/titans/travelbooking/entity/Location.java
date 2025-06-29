@@ -2,10 +2,7 @@ package com.titans.travelbooking.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,7 +10,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Location {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer locationId;
@@ -22,9 +21,7 @@ public class Location {
 
     private String toPlace;
 
-
-    //relation colums
-
+    //relation columns
     @OneToMany(
            mappedBy = "location",
             cascade = CascadeType.ALL,
@@ -40,6 +37,7 @@ public class Location {
     )
     @JsonIgnore
     private List<Booking> bookings;
+
     @OneToMany(
             mappedBy = "location",
             cascade = CascadeType.ALL,
@@ -47,4 +45,5 @@ public class Location {
     )
     @JsonIgnore
     private List<Lodging> lodgings;
+
 }

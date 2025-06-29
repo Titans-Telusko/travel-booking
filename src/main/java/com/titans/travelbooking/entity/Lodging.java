@@ -2,17 +2,18 @@ package com.titans.travelbooking.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Builder
 public class Lodging {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,15 +34,17 @@ public class Lodging {
     private String imageUrl;
 
     private String city;
+
     @OneToMany(
             mappedBy = "lodging",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-            @JsonIgnore
+    @JsonIgnore
     List<Booking> bookings;
-   @ManyToOne
-   @JoinColumn(name = "lodging_id")
+
+    @ManyToOne
+    @JoinColumn(name = "lodging_id")
     private Location location;
 
 }
