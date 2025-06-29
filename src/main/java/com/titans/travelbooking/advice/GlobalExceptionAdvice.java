@@ -1,6 +1,8 @@
 package com.titans.travelbooking.advice;
 
-import jakarta.persistence.OneToMany;
+import com.titans.travelbooking.exception.AdminNotFoundException;
+import com.titans.travelbooking.exception.UserNotFoundException;
+import org.apache.catalina.User;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,5 +31,19 @@ public class GlobalExceptionAdvice {
         String message = "Username already exists. Please use a different email.";
         return new ResponseEntity<>(message, HttpStatus.CONFLICT); // 409 Conflict
     }
+
+    @ExceptionHandler(AdminNotFoundException.class)
+    public ResponseEntity<String> adminIdNotFoundHandler(AdminNotFoundException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<?> userNotFoundHandler(UserNotFoundException ex){
+        Map<String, Object> mp=new HashMap<>();
+        mp.put("TimeStamp" , LocalDate.now());
+        mp.put("error" , ex.getMessage());
+        return new ResponseEntity<>(mp, HttpStatus.NOT_FOUND);
+    }
+
 
 }
