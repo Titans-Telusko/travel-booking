@@ -1,6 +1,6 @@
 package com.titans.travelbooking.service;
 
-import com.titans.travelbooking.dto.UserLoginRequest;
+import com.titans.travelbooking.validation.UserLoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
