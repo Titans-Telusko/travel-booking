@@ -1,6 +1,6 @@
 package com.titans.travelbooking.service.adminService;
 
-import com.titans.travelbooking.dto.AdminRequest;
+import com.titans.travelbooking.validation.AdminRequest;
 import com.titans.travelbooking.entity.Admin;
 import com.titans.travelbooking.exception.AdminNotFoundException;
 import com.titans.travelbooking.repository.IAdminRepo;
