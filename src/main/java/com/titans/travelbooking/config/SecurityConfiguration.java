@@ -19,12 +19,23 @@ import org.springframework.stereotype.Service;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
      @Bean
      public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
          return http
                  .csrf(customize->customize.disable())
                  .authorizeHttpRequests(request->request
-                         .requestMatchers("/users/register" , "/users/login" , "/admins/register" ,"/admins/login").permitAll()
+                         .requestMatchers(
+                                 "/welcome",
+                                 "/users/register",
+                                 "/users/login",
+                                 "/admins/register",
+                                 "/admins/login",
+                                 "/swagger-ui.html",
+                                 "/swagger-ui/**",
+                                 "/v3/api-docs/**",
+                                 "/api-docs/**")
+                         .permitAll()
                          .anyRequest().authenticated())
                  .httpBasic(Customizer.withDefaults())
                  .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -32,19 +43,17 @@ public class SecurityConfiguration {
 
      }
 
-     @Bean
+    @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService){
          DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
          provider.setUserDetailsService(userDetailsService);
          provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
          return provider;
-     }
+    }
 
-     @Bean
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
          return configuration.getAuthenticationManager();
-     }
-
-
+    }
 
 }

@@ -1,14 +1,28 @@
 package com.titans.travelbooking;
 
-import lombok.extern.log4j.Log4j2;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
-@Log4j2
+@Slf4j
 @SpringBootApplication
+@OpenAPIDefinition(
+		info = @Info(
+				title = "Titans Tours and Travels",
+				version = "v1.0",
+				description = "This API is for booking International Tours "
+		),
+		servers = @Server(
+				url = "http://localhost:8084/travels/api/v1/",
+				description = "This app is deployed in the following url"
+		)
+)
 public class TravelBookingApplication {
 
 	@Value("${server.port}")
