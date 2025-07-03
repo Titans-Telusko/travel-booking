@@ -14,8 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UsersController {
+
     @Autowired
-     private IUserService userService;
+    private IUserService userService;
+
     @PostMapping("/register")
     public ResponseEntity<Users> saveUser(@RequestBody @Valid UserRequest userRequest){
         System.out.println(userRequest);
@@ -28,7 +30,6 @@ public class UsersController {
         return "hello user controller setup is ready";
     }
 
-
     @GetMapping("/get-all-users")
     public ResponseEntity<List<Users>> getAllUsers(){
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
@@ -38,4 +39,5 @@ public class UsersController {
     public ResponseEntity<List<Users>> searchByUsername(@PathVariable String word){
         return new ResponseEntity<>(userService.searchByUser(word), HttpStatus.OK);
     }
+
 }

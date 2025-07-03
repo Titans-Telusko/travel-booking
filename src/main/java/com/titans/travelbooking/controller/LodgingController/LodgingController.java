@@ -9,6 +9,8 @@ import com.titans.travelbooking.entity.Lodging;
 import com.titans.travelbooking.service.lodgingService.ILodgingService;
 import com.titans.travelbooking.utils.CloudinaryUpload;
 import com.titans.travelbooking.validation.LodgingRequest;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,10 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @RequestMapping("/lodging")
+@Tag(
+    name = "Lodging Controller",
+    description = "This API is for adding, listing, updating and deleting lodges"
+)
 public class LodgingController {
 
     @Autowired
@@ -33,6 +39,7 @@ public class LodgingController {
     private CloudinaryUpload cloudinaryUpload;
 
     @PostMapping("/add-lodge")
+    @Operation(description = "This endpoint is to add a new lodge into the database")
     public ResponseEntity<Lodging> addLodge(
             @RequestParam("lodge") String lodgeJson,
             @RequestParam("image") MultipartFile imageFile
@@ -52,6 +59,7 @@ public class LodgingController {
     }
 
     @GetMapping("/all-lodges")
+    @Operation(description = "This endpoint is to list all the available lodges")
     public ResponseEntity<CustomSuccessResponse<Lodging>> fetchLodges() {
         log.info("List all the lodges");
 
@@ -68,6 +76,7 @@ public class LodgingController {
     }
 
     @GetMapping("/{id}")
+    @Operation(description = "This endpoint is to list a lodge based on an ID")
     public ResponseEntity<?> fetchLodgeById(@PathVariable Integer id) {
         log.info("Fetching lodge with ID: {}", id);
         Optional<Lodging> lodge = service.getLodgeById(id);
@@ -87,6 +96,7 @@ public class LodgingController {
     }
 
     @PutMapping("/update-lodge/{id}")
+    @Operation(description = "This endpoint is to update major details of a lodge based on an ID")
     public ResponseEntity<CustomSingleSuccessResponse<Lodging>> updateLodgeDetails(
             @PathVariable Integer id,
             @RequestBody LodgingRequest lodgingRequest
@@ -105,6 +115,7 @@ public class LodgingController {
     }
 
     @PatchMapping("/patch-lodge/{id}")
+    @Operation(description = "This endpoint is to update minor details of a lodge based on an ID")
     public ResponseEntity<?> patchLodgeDetails(
             @PathVariable Integer id,
             @RequestBody LodgingPatchRequest lodgingRequest
@@ -123,6 +134,7 @@ public class LodgingController {
     }
 
     @DeleteMapping("/remove-lodge/{id}")
+    @Operation(description = "This endpoint is to delete a lodge based on an ID")
     public ResponseEntity<?> removeLodge(@PathVariable Integer id) {
         log.info("Deleting lodge with ID: {}", id);
 
