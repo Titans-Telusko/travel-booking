@@ -1,12 +1,10 @@
 package com.titans.travelbooking.repository;
 
-import com.titans.travelbooking.entity.Location;
+import com.titans.travelbooking.entity.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
-
 @Repository
-public interface LocationRepo extends JpaRepository<Location, Integer> {
+public interface IBookingRepository extends JpaRepository<Booking,Integer> {
 
 }

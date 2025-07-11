@@ -7,7 +7,7 @@ public record LodgingPatchRequest(
         String hotelType,
         Float rating,
         BigDecimal price,
-        Integer roomsAvailabele,
+        Integer roomsAvailable,
         String country,
         String imageUrl,
         String city

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -98,13 +99,15 @@ public class GlobalExceptionAdvice {
                 .body(new CustomErrorResponse(HttpStatus.BAD_REQUEST.value(), "Invalid File", ex.getMessage()));
     }
 
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public ResponseEntity<CustomErrorResponse> handleNoHandlerFound(NoHandlerFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<CustomErrorResponse> handleException(AccessDeniedException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(new CustomErrorResponse(
-                        HttpStatus.NOT_FOUND.value(),
-                        "No handler found for the requested endpoint",
-                        ex.getMessage()));
+                        HttpStatus.UNAUTHORIZED.value(),
+                        "Access Denied",
+                        ex.getMessage()
+                ));
     }
 
     @ExceptionHandler(LodgeNotFoundException.class)
@@ -115,5 +118,25 @@ public class GlobalExceptionAdvice {
                         "Lodge Not Found",
                         ex.getMessage()));
     }
+    @ExceptionHandler(TourAlreadyExistsWithName.class)
+    public ResponseEntity<CustomErrorResponse> tourAlreadyExists(TourAlreadyExistsWithName ex){
+        return ResponseEntity.status(HttpStatus.ALREADY_REPORTED)
+                .body(new CustomErrorResponse(
+                        HttpStatus.ALREADY_REPORTED.value(),
+                        "Vacation name must be unique",
+                        ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<CustomErrorResponse> handleNoHandlerFound(NoHandlerFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new CustomErrorResponse(
+                        HttpStatus.NOT_FOUND.value(),
+                        "No handler found for the requested endpoint",
+                        ex.getMessage()));
+    }
+
+
 
 }

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdminRequest {
-    @NotNull(message = "fullname should not be empty")
+    @NotNull(message = "fullName should not be empty")
     private String fullName;
     @Email(message = "enter valid email ")
     private String username;

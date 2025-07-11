@@ -3,6 +3,7 @@ package com.titans.travelbooking.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,9 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Builder
+@Slf4j
 public class Lodging {
     @Id
+    @Column(name="lodging_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer lId;
 
     private String hotelName;
@@ -27,7 +31,7 @@ public class Lodging {
 
     private BigDecimal price;
 
-    private Integer roomsAvailabele;
+    private Integer roomsAvailable;
 
     private String country;
 
@@ -44,7 +48,6 @@ public class Lodging {
     List<Booking> bookings;
 
     @ManyToOne
-    @JoinColumn(name = "lodging_id")
     private Location location;
 
 }

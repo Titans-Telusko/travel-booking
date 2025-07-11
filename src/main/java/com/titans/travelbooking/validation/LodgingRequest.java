@@ -31,7 +31,7 @@ public class LodgingRequest {
 
     @NotNull(message = "Available rooms count is required")
     @Min(value = 1, message = "There must be at least 1 room available")
-    private Integer roomsAvailabele;
+    private Integer roomsAvailable;
 
     @NotBlank(message = "Country must not be blank")
     @Size(max = 100, message = "Country name must not exceed 100 characters")

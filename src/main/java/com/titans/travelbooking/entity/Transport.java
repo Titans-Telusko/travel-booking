@@ -31,7 +31,7 @@ public class Transport {
     private Integer ticketsAvailable;
 
 
-    //relation colums
+    //relation columns
     @ManyToOne
     @JoinColumn(
             name = "location_id",

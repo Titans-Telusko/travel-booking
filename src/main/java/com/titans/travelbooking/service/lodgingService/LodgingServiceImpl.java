@@ -76,7 +76,7 @@ public class LodgingServiceImpl implements ILodgingService {
         existingLodge.setCity(lodge.getCity());
         existingLodge.setRating(lodge.getRating());
         existingLodge.setPrice(lodge.getPrice());
-        existingLodge.setRoomsAvailabele(lodge.getRoomsAvailabele());
+        existingLodge.setRoomsAvailable(lodge.getRoomsAvailable());
         existingLodge.setCountry(lodge.getCountry());
         existingLodge.setImageUrl(lodge.getImageUrl());
         existingLodge.setCity(lodge.getCity());
@@ -93,7 +93,7 @@ public class LodgingServiceImpl implements ILodgingService {
         if(patch.hotelType() != null) existingLodge.setHotelType(patch.hotelType());
         if(patch.rating() != null) existingLodge.setRating(patch.rating());
         if(patch.price() != null) existingLodge.setPrice(patch.price());
-        if(patch.roomsAvailabele() != null) existingLodge.setRoomsAvailabele(patch.roomsAvailabele());
+        if(patch.roomsAvailable() != null) existingLodge.setRoomsAvailable(patch.roomsAvailable());
         if(patch.country() != null) existingLodge.setCountry(patch.country());
         if(patch.imageUrl()!= null) existingLodge.setImageUrl(patch.imageUrl());
         if(patch.city() != null) existingLodge.setCity(patch.city());
@@ -117,7 +117,7 @@ public class LodgingServiceImpl implements ILodgingService {
                 .hotelType(lodgingRequest.getHotelType())
                 .rating(lodgingRequest.getRating())
                 .price(lodgingRequest.getPrice())
-                .roomsAvailabele(lodgingRequest.getRoomsAvailabele())
+                .roomsAvailable(lodgingRequest.getRoomsAvailable())
                 .country(lodgingRequest.getCountry())
                 .imageUrl(lodgingRequest.getImageUrl())
                 .city(lodgingRequest.getCity())
