@@ -9,10 +9,23 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * Represents the tour which is a package of travel services offered for sale by
+ * travel companies.
+ *
+ * <p>A Tour is a set of travel services, such as flights, accommodations, rental
+ * cars, and activities, that are sold together as a single package. It is a
+ * convenient way to purchase all the travel services needed for the trip in one
+ * place.
+ *
+ * <p>A Tour can have multiple locations, which are the places visited during the
+ * trip.
+ */
 public class Tour {
 
       @Id
