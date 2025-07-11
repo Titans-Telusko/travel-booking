@@ -115,5 +115,15 @@ public class GlobalExceptionAdvice {
                         "Lodge Not Found",
                         ex.getMessage()));
     }
+    @ExceptionHandler(TourAlreadyExistsWithName.class)
+    public ResponseEntity<CustomErrorResponse> tourAlreadyExists(TourAlreadyExistsWithName ex){
+        return ResponseEntity.status(HttpStatus.ALREADY_REPORTED)
+                .body(new CustomErrorResponse(
+                        HttpStatus.ALREADY_REPORTED.value(),
+                        "Vacation name must be unique",
+                        ex.getMessage()
+                ));
+    }
+
 
 }

@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -15,6 +17,7 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "location_id")
     private Integer locationId;
 
     private String fromPlace;
@@ -23,7 +26,7 @@ public class Location {
 
     //relation columns
     @OneToMany(
-           mappedBy = "location",
+            mappedBy = "location",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
@@ -45,5 +48,11 @@ public class Location {
     )
     @JsonIgnore
     private List<Lodging> lodgings;
+
+
+    @ManyToMany(mappedBy = "locations")
+    @JsonIgnore
+    private Set<Tour> tours = new HashSet<>();
+
 
 }

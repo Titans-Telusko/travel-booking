@@ -16,6 +16,7 @@ import java.util.List;
 @Builder
 public class Lodging {
     @Id
+    @Column(name="lodging_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer lId;
 
@@ -27,7 +28,7 @@ public class Lodging {
 
     private BigDecimal price;
 
-    private Integer roomsAvailabele;
+    private Integer roomsAvailable;
 
     private String country;
 
